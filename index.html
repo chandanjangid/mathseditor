@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics Editor </title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+<div class="math-editor-container">
+    <div class="math-toolbar">
+        <button title="Operators" id="operatorsButton"  onclick="toggleBasicOptions('basicOptions')">×÷</button>
+        <button title="Fraction"  id="fractionButton"  onclick="toggleFractionOptions('fractionOptions')">a/b</button>
+        <button title="Relations" id="relationsButton"  onclick="toggleRelationOptions('relationOptions')">≤⊃</button>
+        <button title="Arrows"    id="arrowsButton"   onclick="toggleArrowOptions('arrowOption')">←⇑</button>
+       <button title="Greek"   id="greekButton"     onclick="toggleGreekOptions('greekOption')">αβ</button>
+        <button id="sinButton" onclick="toggleSinOptions('sinOptions')">sin</button>
+        <button id="sinhButton" onclick="toggleSinhOptions('sinhOptions')">sinh</button>
+        <button title="Matrix"  id="matrixButton"  onclick="toggleMatrixOptions('matrixOptions')"> <img src="/icons/matrix.png" height="30" width="30"></button>
+        <button title="Undo" id="undoBtn" onclick="undo()">↻</button>
+        <button title="Redo" id="redoBtn" onclick="redo()">↺</button>
+          
+        <!-- Other buttons -->
+    </div>
+
+    <div id="basicOptions"   class="options"> 
+        <button onclick="insertSymbol('+')">+</button>
+        <button onclick="insertSymbol('-')">−</button>
+        <button onclick="insertSymbol('=')">=</button>
+        <button onclick="insertSymbol('≠')">≠</button>
+        <button onclick="insertSymbol('×')">×</button>
+        <button onclick="insertSymbol('÷')">÷</button>
+        <button onclick="insertSymbol('%')">%</button> <!-- Modulo -->
+    <button onclick="insertSymbol('∪')">∪</button> <!-- Union -->
+    <button onclick="insertSymbol('∩')">∩</button> <!-- Intersection -->
+    <button onclick="insertSymbol('∅')">∅</button> <!-- Empty set -->
+    <button onclick="insertSymbol('∧')">∧</button> <!-- And -->
+    <button onclick="insertSymbol('∨')">∨</button> <!-- Or -->
+    <button onclick="insertSymbol('¬')">¬</button> <!-- Not -->
+    <button onclick="insertSymbol('π')">π</button> <!-- Pi -->
+    <button onclick="insertSymbol('∞')">∞</button> <!-- Infinity -->
+    <button onclick="insertSymbol('!')">!</button> <!-- Factorial -->
+    <button onclick="insertSymbol('∠')">∠</button> <!-- Angle -->
+    <button onclick="insertSymbol('∆')">∆</button> <!-- Delta -->
+    <button onclick="insertSymbol('∇')">∇</button> <!-- Nabla -->
+    <button onclick="insertSymbol('∂')">∂</button> <!-- Partial derivative -->
+    <button onclick="insertSymbol('⊥')">⊥</button> <!-- Perpendicular -->
+    <button onclick="insertSymbol('∥')">∥</button> <!-- Parallel -->
+    <button onclick="insertSymbol('∴')">∴</button> <!-- Therefore -->
+    <button onclick="insertSymbol('∵')">∵</button> <!-- Because -->
+    <button onclick="insertSymbol('‰')">‰</button> <!-- Permille -->
+        
+            <button class="ellipsis-option" onclick="insertEditableEllipsis('&#8942;')"> &#8942; </button> <!-- Vertical ellipsis -->
+            <button class="ellipsis-option" onclick="insertEditableEllipsis('&#8943;')"> &#8943; </button> <!-- Middleline horizontal ellipsis -->
+            <button class="ellipsis-option" onclick="insertEditableEllipsis('&#8944;')"> &#8944; </button> <!-- Upper right diagonal ellipsis -->
+            <button class="ellipsis-option" onclick="insertEditableEllipsis('&#8945;')"> &#8945; </button> <!-- Lower right diagonal ellipsis -->
+        
+    </div>
+
+    <div id="fractionOptions"  class="options" >
+        <button onclick="insertFraction()"> (a/b)</button> <!-- Fraction -->
+        <button onclick="insertBevelledFraction()"> (a/b)</button> <!-- Bevelled Fraction -->
+        <button onclick="insertRoot()">√x</button> <!-- Root -->
+        <button onclick="insertSquareRoot()">√(x²)</button> <!-- Square Root -->
+        <div class="symbols-toolbar">
+        <button title="Parentheses"     onclick="insertSymbol('()');hideFractionOptions();">( )</button>
+        <button title="Square Brackets"     onclick="insertSymbol('[]');hideFractionOptions();">[ ]</button>
+        <button title="Angle Brackets"     onclick="insertSymbol('⟨⟩');hideFractionOptions();">⟨ ⟩</button>
+        <button title="vertical Bars"     onclick="insertSymbol('| |');hideFractionOptions();">| |</button>
+        <button title="Curly Brackets"     onclick="insertSymbol('{}');hideFractionOptions();">{ }</button>
+        <button title="Select Brackets"     onclick="insertSymbol('? ?');hideFractionOptions();">? ?</button>
+        <button title="forward slash"     onclick="insertSymbol('/');hideFractionOptions();">/</button>
+        <button title="Plus Minus Sign"     onclick="insertSymbol('±');hideFractionOptions();">±</button>
+        <button title="Greater than or Equal to"     onclick="insertSymbol('≥');hideFractionOptions();">≥</button>
+        <button title="less than or Equal to"     onclick="insertSymbol('≤');hideFractionOptions();">≤</button>
+        <button title="Element of"     onclick="insertSymbol('∈');hideFractionOptions();">∈</button>
+        <button title="Not a subset of"     onclick="insertSymbol('⊈');hideFractionOptions();">⊈</button>
+        <button title="subset of"     onclick="insertSymbol('⊆');hideFractionOptions();">⊆</button>
+        <button title="Union"     onclick="insertSymbol('∪');hideFractionOptions();">∪</button>
+        <button title="Intersection"     onclick="insertSymbol('∩');hideFractionOptions();">∩</button>
+        <button title="pie"     onclick="insertSymbol('π');hideFractionOptions();">π</button>
+        <button title="Alpha"     onclick="insertSymbol('α');hideFractionOptions();">α</button>
+        <button title="Infinity"     onclick="insertSymbol('∞');hideFractionOptions();">∞</button>
+        <button title="Beta"     onclick="insertSymbol('β');hideFractionOptions();">β</button>
+        <button title="Empty"     onclick="insertSymbol('∅');hideFractionOptions();">∅</button>
+        <button title="Theta"     onclick="insertSymbol('θ');hideFractionOptions();">θ</button>
+        <button title=""     onclick="insertSymbol('⊖');hideFractionOptions();">⊖</button>
+        
+        
+        </div>
+    </div>
+
+    
+    <div id="matrixOptions"  class="options" >
+        <button title="n*m Matrix" onclick="showMatrixSizeInput('basic')">
+            <span class="matrix-icon">[a b]<br>[c d]</span>
+        </button>
+        <button title="n*m Parenthesis" onclick="showMatrixSizeInput('parenthesis')">
+            <span class="matrix-icon">(a b)<br>(c d)</span>
+        </button>
+        <button title="n*m Left Brace" onclick="showMatrixSizeInput('leftBrace')">
+            <span class="matrix-icon">{a b<br>{c d</span>
+        </button>
+        <button title="n*m Right Brace" onclick="showMatrixSizeInput('rightBrace')">
+            <span class="matrix-icon">a b}<br>c d}</span>
+        </button>
+        <button title="n*m Square Brackets" onclick="showMatrixSizeInput('squareBrackets')">
+            <span class="matrix-icon">[a b]<br>[c d]</span>
+        </button>
+        <button title="n*m Vertical Bars" onclick="showMatrixSizeInput('verticalBars')">
+            <span class="matrix-icon">|a b|<br>|c d|</span>
+        </button>
+        <button title="2x2 Identity Matrix" onclick="showMatrixSizeInput('identity')">
+            <span class="matrix-icon">1 0<br>0 1</span>
+        </button>
+        <button title="1x2 Square Brackets Matrix" onclick="showMatrixSizeInput('1x2_squareBrackets')">
+            <span class="matrix-icon">[a b]</span>
+        </button>
+        <button title="1x2 Parenthesis Matrix" onclick="showMatrixSizeInput('1x2_parenthesis')">
+            <span class="matrix-icon">(a b)</span>
+        </button>
+        <button title="2x1 Matrix" onclick="showMatrixSizeInput('2x1')">
+            <span class="matrix-icon">[a]<br>[b]</span>
+        </button>
+        <button title="2x1 Square Brackets Matrix" onclick="showMatrixSizeInput('2x1_squareBrackets')">
+            <span class="matrix-icon">[a]<br>[b]</span>
+        </button>
+        <button title="2x1 Parenthesis Matrix" onclick="showMatrixSizeInput('2x1_parenthesis')">
+            <span class="matrix-icon">(a)<br>(b)</span>
+        </button>
+        <button title="3x1 Square Brackets Matrix" onclick="showMatrixSizeInput('3x1_squareBrackets')">
+            <span class="matrix-icon">[a]<br>[b]<br>[c]</span>
+        </button>
+        <button title="3x1 Parenthesis Matrix" onclick="showMatrixSizeInput('3x1_parenthesis')">
+            <span class="matrix-icon">(a)<br>(b)<br>(c)</span>
+        </button>
+        <button title="1x3 Square Brackets Matrix" onclick="showMatrixSizeInput('1x3_squareBrackets')">
+            <span class="matrix-icon">[a b c]</span>
+        </button>
+        <button title="1x3 Parenthesis Matrix" onclick="showMatrixSizeInput('1x3_parenthesis')">
+            <span class="matrix-icon">(a b c)</span>
+        </button>
+
+    </div>
+    <div id="relationOptions"  class="options" >
+        <!-- Relation Symbols -->
+        <button  title="Equal to"   onclick="insertSymbol('=')">=</button>
+        <button  title="Not equal to"   onclick="insertSymbol('≠')">≠</button>
+        <button  title="Approximately equal to"   onclick="insertSymbol('≈')">≈</button>
+        <button  title=" Not approximately equal to"   onclick="insertSymbol('≉')">≉</button>
+        <button  title=" Identical to "   onclick="insertSymbol('≡')">≡</button>
+        <button  title="Not identical to"   onclick="insertSymbol('≢')">≢</button>
+        <button  title="Subset of"   onclick="insertSymbol('⊂')">⊂</button>
+        <button  title="Superset of"   onclick="insertSymbol('⊃')">⊃</button>
+        <button  title="Not a Subset of"   onclick="insertSymbol('⊄')">⊄</button>
+        <button  title="Not a superset of"   onclick="insertSymbol('⊅')">⊅</button>
+        <button  title="Subset of or Equal to"   onclick="insertSymbol('⊆')">⊆</button>
+        <button  title="Superset of or Equal to"   onclick="insertSymbol('⊇')">⊇</button>
+        <button  title="Nither Subset of or nor equal to"   onclick="insertSymbol('⊈')">⊈</button>
+        <button  title="neither superset or nor qual to"   onclick="insertSymbol('⊉')">⊉</button>
+        <button  title="Neither less than nor qual to"   onclick="insertSymbol('≰')">≰</button>
+        <button  title="Neither greater than nor equal to"   onclick="insertSymbol('≱')">≱</button>
+        <button  title="Similar to"   onclick="insertSymbol('~')">~</button>
+        <button  title="Almost Equal to"   onclick="insertSymbol('≈')">≈</button>
+        <button  title="Asymptotically equal to"   onclick="insertSymbol('≃')">≃</button>
+        <button  title=" Similar equal to"   onclick="insertSymbol('≂')">≂</button>
+        <button  title=" Proportional to"   onclick="insertSymbol('∝')">∝</button>
+        <button  title="Dollar"   onclick="insertSymbol('$')">$ </button>
+        <button  title=" Less than"   onclick="insertSymbol('<')">&lt;</button>
+        <button  title=" Greater than"   onclick="insertSymbol('>')">&gt;</button>
+        <button  title="Less than equal to"   onclick="insertSymbol('≤')">≤</button>
+        <button  title="Greater than equal to"   onclick="insertSymbol('≥')">≥</button>
+        <button  title="Not less than"   onclick="insertSymbol('≮')">≮</button>
+        <button  title="Not Greater than"   onclick="insertSymbol('≯')">≯</button>
+        <button  title="Much less than"   onclick="insertSymbol('≪')">≪</button>
+        <button  title="Much Greater than"   onclick="insertSymbol('≫')">≫</button>
+        <button  title="Element of"   onclick="insertSymbol('∈')">∈</button>
+        <button  title="Not an Element of"   onclick="insertSymbol('∉')">∉</button>
+        <button  title="Contains as member"   onclick="insertSymbol('∋')">∋</button>
+        <button  title="Does not contains as member"   onclick="insertSymbol('∌')">∌</button>
+        <button  title="Empty set"   onclick="insertSymbol('∅')">∅</button>
+        <button  title="Set of natural number"   onclick="insertSymbol('ℕ')">ℕ</button>
+        <button  title="Set of Integer"   onclick="insertSymbol('ℤ')">ℤ</button>
+        <button  title="Set of real number"   onclick="insertSymbol('ℝ')">ℝ</button>
+        <button  title="Set of relational number"   onclick="insertSymbol('ℚ')">ℚ</button>
+        <button  title="Set of prime number"   onclick="insertSymbol('ℙ')">ℙ</button>
+        <button  title="Set of complex number"   onclick="insertSymbol('ℂ')">ℂ</button>
+    </div>
+
+    <div id="sinOptions"  class="options" >
+        <button onclick="insertSymbol('sin()'); hideTrigOptions()">sin</button>
+        <button onclick="insertSymbol('cos()'); hideTrigOptions()">cos</button>
+        <button onclick="insertSymbol('tan()');  hideTrigOptions()">tan</button>
+        <button onclick="insertSymbol('sec()');  hideTrigOptions()">sec</button>
+        <button onclick="insertSymbol('cot()');  hideTrigOptions()">cot</button>
+        <button onclick="insertSymbol('csc()');  hideTrigOptions()">csc</button>
+        <button onclick="insertSymbol('ln()');  hideTrigOptions()">ln</button>
+        <button onclick="insertSymbol('log()');  hideTrigOptions()">log</button>
+        <button onclick="insertSymbol('log₁₀()');  hideTrigOptions()">log₁₀</button>
+        <button onclick="insertLogarithm();  hideTrigOptions()">logₙ()</button>
+        <button onclick="insertSymbol('exp()');  hideTrigOptions()">exp</button>
+
+        <button onclick="insertSymbol('sin⁻¹(■)');  hideTrigOptions()">sin⁻¹</button>
+        <button onclick="insertSymbol('cos⁻¹(■)');  hideTrigOptions()">cos⁻¹</button>
+        <button onclick="insertSymbol('tan⁻¹(■)');  hideTrigOptions()">tan⁻¹</button>
+        <button onclick="insertSymbol('sec⁻¹(■)');  hideTrigOptions()">sec⁻¹</button>
+        <button onclick="insertSymbol('cot⁻¹(■)');  hideTrigOptions()">cot⁻¹</button>
+        <button onclick="insertSymbol('csc⁻¹(■)');  hideTrigOptions()">csc⁻¹</button>
+
+        <button onclick="insertSymbol('arcsin(■)');  hideTrigOptions()">arcsin</button>
+        <button onclick="insertSymbol('arccos(■)');  hideTrigOptions()">arccos</button>
+        <button onclick="insertSymbol('arctan(■)');  hideTrigOptions()">arctan</button>
+        <button onclick="insertSymbol('arcsec(■)');  hideTrigOptions()">arcsec</button>
+        <button onclick="insertSymbol('arccot(■)');  hideTrigOptions()">arccot</button>
+        <button onclick="insertSymbol('arccsc(■)');  hideTrigOptions()">arccsc</button>
+    </div>
+    
+    
+    <div id="sinhOptions"  class="options" >
+            <button onclick="insertSymbol('sinh()'); hideSinhOptions()">sinh</button>
+            <button onclick="insertSymbol('cosh()'); hideSinhOptions()">cosh</button>
+            <button onclick="insertSymbol('tanh()'); hideSinhOptions()">tanh</button>
+            <button onclick="insertSymbol('sech()'); hideSinhOptions()">sech</button>
+            <button onclick="insertSymbol('coth()'); hideSinhOptions()">coth</button>
+            <button onclick="insertSymbol('csch()'); hideSinhOptions()">csch</button>
+            
+            <button onclick="insertSymbol('sinh⁻¹(■)'); hideSinhOptions()">sinh⁻¹</button>
+            <button onclick="insertSymbol('cosh⁻¹(■)'); hideSinhOptions()">cosh⁻¹</button>
+            <button onclick="insertSymbol('tanh⁻¹(■)'); hideSinhOptions()">tanh⁻¹</button>
+            <button onclick="insertSymbol('sech⁻¹(■)'); hideSinhOptions()">sech⁻¹</button>
+            <button onclick="insertSymbol('coth⁻¹(■)'); hideSinhOptions()">coth⁻¹</button>
+            <button onclick="insertSymbol('csch⁻¹(■)'); hideSinhOptions()">csch⁻¹</button>
+            
+            <button onclick="insertSymbol('arcsinh(■)'); hideSinhOptions()">arcsinh</button>
+            <button onclick="insertSymbol('arccosh(■)'); hideSinhOptions()">arccosh</button>
+            <button onclick="insertSymbol('arctanh(■)'); hideSinhOptions()">arctanh</button>
+            <button onclick="insertSymbol('arcsech(■)'); hideSinhOptions()">arcsech</button>
+            <button onclick="insertSymbol('arccoth(■)'); hideSinhOptions()">arccoth</button>
+            <button onclick="insertSymbol('arccsch(■)'); hideSinhOptions()">arccsch</button>
+        </div>
+        
+        <div id="arrowOption"  class="options" >
+        <button onclick="insertSymbol('→')">→</button>
+            <button onclick="insertSymbol('↔')">↔</button>
+            <button onclick="insertSymbol('⇚')">⇚</button>
+            <button onclick="insertSymbol('⇛')">⇛</button>
+            <button onclick="insertSymbol('⇔')">⇔</button>
+            <button onclick="insertSymbol('⇕')">⇕</button>
+            <button onclick="insertSymbol('⇤')">⇤</button>
+            <button onclick="insertSymbol('⇥')">⇥</button>
+            <button onclick="insertSymbol('⇵')">⇵</button>
+            <button onclick="insertSymbol('⇦')">⇦</button>
+            <button onclick="insertSymbol('⇨')">⇨</button>
+            <button onclick="insertSymbol('⇧')">⇧</button>
+            <button onclick="insertSymbol('⇩')">⇩</button>
+            <button onclick="insertSymbol('↦')">↦</button>
+            <button onclick="insertSymbol('↤')">↤</button>
+            <button onclick="insertSymbol('↕')">↕</button>
+            <button onclick="insertSymbol('↧')">↧</button>
+            <button onclick="insertSymbol('↑')">↑</button>
+            <button onclick="insertSymbol('↓')">↓</button>
+            <button onclick="insertSymbol('⇐')">⇐</button>
+            <button onclick="insertSymbol('⇒')">⇒</button>
+            <button onclick="insertSymbol('⇑')">⇑</button>
+            <button onclick="insertSymbol('⇓')">⇓</button>
+            <button onclick="insertSymbol('↖')">↖</button>
+            <button onclick="insertSymbol('↘')">↘</button>
+            <button onclick="insertSymbol('↗')">↗</button>
+            <button onclick="insertSymbol('↙')">↙</button>
+            <button onclick="insertSymbol('↚')">↚</button>
+            <button onclick="insertSymbol('↛')">↛</button>
+            <button onclick="insertSymbol('⇠')">⇠</button>
+            <button onclick="insertSymbol('⇢')">⇢</button>
+            <button onclick="insertSymbol('↞')">↞</button>
+            <button onclick="insertSymbol('↠')">↠</button>
+            <button onclick="insertSymbol('↮')">↮</button>
+            <button onclick="insertSymbol('↩')">↩</button>
+            <button onclick="insertSymbol('↪')">↪</button>
+            <button onclick="insertSymbol('↫')">↫</button>
+            <button onclick="insertSymbol('↬')">↬</button>
+            <button onclick="insertSymbol('↢')">↢</button>
+            <button onclick="insertSymbol('↣')">↣</button>
+            <button onclick="insertSymbol('⇍')">⇍</button>
+            <button onclick="insertSymbol('⇏')">⇏</button>
+            <button onclick="insertSymbol('⇎')">⇎</button>
+            <button onclick="insertSymbol('↰')">↰</button>
+            <button onclick="insertSymbol('↱')">↱</button>
+            <button onclick="insertSymbol('↜')">↜</button>
+            <button onclick="insertSymbol('↝')">↝</button>
+            <button onclick="insertSymbol('↼')">↼</button>
+            <button onclick="insertSymbol('↽')">↽</button>
+            <button onclick="insertSymbol('⇀')">⇀</button>
+            <button onclick="insertSymbol('⇁')">⇁</button>
+            <button onclick="insertSymbol('↲')">↲</button>
+            <button onclick="insertSymbol('↳')">↳</button>
+            <button onclick="insertSymbol('⇚')">⇚</button>
+            <button onclick="insertSymbol('⇛')">⇛</button>
+       </div>
+    
+         
+        <div id="greekOption"  class="options"  >        
+
+            <div>
+            <button title=" Alpha" onclick="insertSymbol('α')">α</button>
+            <button title=" Beta" onclick="insertSymbol('β')">β</button>
+            <button title=" Gamma" onclick="insertSymbol('γ')">γ</button>
+            <button title=" Delta" onclick="insertSymbol('δ')">δ</button>
+            <button title=" Epsilon" onclick="insertSymbol('ε')">ε</button>
+            <button title=" Zeta" onclick="insertSymbol('ζ')">ζ </button>
+            <button title=" Eta" onclick="insertSymbol('η')">η>
+            <button title=" Theta" onclick="insertSymbol('θ')">θ</button>
+            <button title=" Iota" onclick="insertSymbol('ι')">ι</button>
+            <button title=" Kappa" onclick="insertSymbol('κ')">κ</button>
+            <button title=" Lambda" onclick="insertSymbol('λ')">λ</button>
+            <button title=" Mu" onclick="insertSymbol('μ')">μ</button>
+            <button title=" Nu" onclick="insertSymbol('ν')">ν</button>
+            <button title=" Xi" onclick="insertSymbol('ξ')">ξ</button>
+            <button title=" Omicron" onclick="insertSymbol('ο')">ο</button>
+            <button title=" Pi" onclick="insertSymbol('π')">π</button>
+            <button title=" Rho" onclick="insertSymbol('ρ')">ρ</button>
+            <button title=" Sigma" onclick="insertSymbol('σ')">σ</button>
+            <button title=" Tau" onclick="insertSymbol('τ')">τ</button>
+            <button title=" Upsilon" onclick="insertSymbol('υ')">υ</button>
+            <button title=" Phi" onclick="insertSymbol('φ')">φ</button>
+            <button title=" Chi" onclick="insertSymbol('χ')">χ</button>
+            <button title=" Psi" onclick="insertSymbol('ψ')">ψ</button>
+            <button title=" Omega" onclick="insertSymbol('ω')">ω</button>
+            <button title=" Gamma" onclick="insertSymbol('Γ')">Γ</button>
+            <button title=" Delta" onclick="insertSymbol('Δ')">Δ</button>
+            <button title=" Theta" onclick="insertSymbol('Θ')">Θ</button>
+            <button title=" Lambd" onclick="insertSymbol('Λ')">Λ</button>
+            <button title=" Xi" onclick="insertSymbol('Ξ')">Ξ</button>
+            <button title=" Pi" onclick="insertSymbol('Π')">Π</button>
+            <button title=" Sigma" onclick="insertSymbol('Σ')">Σ</button>
+            <button title=" Upsilon" onclick="insertSymbol('Υ')">Υ </button>
+            <button title=" Phi" onclick="insertSymbol('Φ')">Φ</button>
+            </div>
+            <div>
+                <button title="Double struck capital A" onclick="insertSymbol('𝔸')">𝔸</button>
+                <button title="Double struck capital B" onclick="insertSymbol('𝔹')">𝔹</button>
+                <button title="Double struck capital C" onclick="insertSymbol('ℂ')">ℂ</button>
+                <button title="Double struck capital D" onclick="insertSymbol('𝔻')">𝔻</button>
+                <button title="Double struck capital E" onclick="insertSymbol('𝔼')">𝔼</button>
+                <button title="Double struck capital F" onclick="insertSymbol('𝔽')">𝔽</button>
+                <button title="Double struck capital G" onclick="insertSymbol('𝔾')">𝔾</button>
+                <button title="Double struck capital H" onclick="insertSymbol('ℍ')">ℍ</button>
+                <button title="Double struck capital I" onclick="insertSymbol('𝕀')">𝕀</button>
+                <button title="Double struck capital J" onclick="insertSymbol('𝕁')">𝕁</button>
+                <button title="Double struck capital K" onclick="insertSymbol('𝕂')">𝕂</button>
+                <button title="Double struck capital L" onclick="insertSymbol('𝕃')">𝕃</button>
+                <button title="Double struck capital M" onclick="insertSymbol('𝕄')">𝕄</button>
+                <button title="Double struck capital N" onclick="insertSymbol('ℕ')">ℕ</button>
+                <button title="Double struck capital O" onclick="insertSymbol('𝕆 ')">𝕆</button>
+                <button title="Double struck capital P" onclick="insertSymbol('ℙ')">ℙ</button>
+                <button title="Double struck capital Q" onclick="insertSymbol('ℚ')">ℚ</button>
+                <button title="Double struck capital R" onclick="insertSymbol('ℝ')">ℝ</button>
+                <button title="Double struck capital S" onclick="insertSymbol('𝕊')">𝕊</button>
+                <button title="Double struck capital T" onclick="insertSymbol('𝕋')">𝕋</button>
+                <button title="Double struck capital U" onclick="insertSymbol('𝕌')">𝕌</button>
+                <button title="Double struck capital V" onclick="insertSymbol('𝕍')">𝕍</button>
+                <button title="Double struck capital W" onclick="insertSymbol('𝕎')">𝕎</button>
+                <button title="Double struck capital X" onclick="insertSymbol('𝕏')">𝕏</button>
+                <button title="Double struck capital Y" onclick="insertSymbol('𝕐')">𝕐</button>
+                <button title="Double struck capital Z" onclick="insertSymbol('ℤ')">ℤ</button>
+            </div>
+            <div>
+                <button title="Script capital A" onclick="insertSymbol('𝒜')">𝒜</button>
+                <button title="Script capital B" onclick="insertSymbol('ℬ')">ℬ</button>
+                <button title="Script capital C" onclick="insertSymbol('𝒞')">𝒞</button>
+                <button title="Script capital D" onclick="insertSymbol('𝒟')">𝒟</button>
+                <button title="Script capital E" onclick="insertSymbol('ℰ')">ℰ</button>
+                <button title="Script capital F" onclick="insertSymbol('ℱ')">ℱ</button>
+                <button title="Script capital G" onclick="insertSymbol('𝒢')">𝒢</button>
+                <button title="Script capital H" onclick="insertSymbol('ℋ')">ℋ</button>
+                <button title="Script capital I" onclick="insertSymbol('ℐ')">ℐ</button>
+                <button title="Script capital J" onclick="insertSymbol('𝒥')">𝒥</button>
+                <button title="Script capital K" onclick="insertSymbol('𝒦')">𝒦</button>
+                <button title="Script capital L" onclick="insertSymbol('ℒ')">ℒ</button>
+                <button title="Script capital M" onclick="insertSymbol('ℳ')">ℳ</button>
+                <button title="Script capital N" onclick="insertSymbol('𝒩')">𝒩</button>
+                <button title="Script capital O" onclick="insertSymbol('𝒪')">𝒪</button>
+                <button title="Script capital P" onclick="insertSymbol('𝒫')">𝒫</button>
+                <button title="Script capital Q" onclick="insertSymbol('𝒬')">𝒬</button>
+                <button title="Script capital R" onclick="insertSymbol('ℛ')">ℛ</button>
+                <button title="Script capital S" onclick="insertSymbol('𝒮')">𝒮</button>
+                <button title="Script capital T" onclick="insertSymbol('𝒯')">𝒯</button>
+                <button title="Script capital U" onclick="insertSymbol('𝒰')">𝒰</button>
+                <button title="Script capital V" onclick="insertSymbol('𝒱')">𝒱</button>
+                <button title="Script capital W" onclick="insertSymbol('𝒲')">𝒲</button>
+                <button title="Script capital X" onclick="insertSymbol('𝒳')">𝒳</button>
+                <button title="Script capital Y" onclick="insertSymbol('𝒴')">𝒴</button>
+                <button title="Script capital Z" onclick="insertSymbol('𝒵')">𝒵</button>
+            </div>
+            <div class="script">
+                <button title="Script a" onclick="insertSymbol('𝒶')">𝒶</button>
+                <button title="Script b" onclick="insertSymbol('𝒷')">𝒷</button>
+                <button title="Script c" onclick="insertSymbol('𝒸')">𝒸</button>
+                <button title="Script d" onclick="insertSymbol('𝒹')">𝒹</button>
+                <button title="Script e" onclick="insertSymbol('𝓮')">𝓮</button>
+                <button title="Script f" onclick="insertSymbol('𝒻')">𝒻</button>
+                <button title="Script g" onclick="insertSymbol('𝓰')">𝓰</button>
+                <button title="Script h" onclick="insertSymbol('𝒽')">𝒽</button>
+                <button title="Script i" onclick="insertSymbol('𝒾')">𝒾</button>
+                <button title="Script j" onclick="insertSymbol('𝒿')">𝒿</button>
+                <button title="Script k" onclick="insertSymbol('𝓀')">𝓀</button>
+                <button title="Script l" onclick="insertSymbol('𝓁')">𝓁</button>
+                <button title="Script m" onclick="insertSymbol('𝓂')">𝓂</button>
+                <button title="Script n" onclick="insertSymbol('𝓃')">𝓃</button>
+                <button title="Script o" onclick="insertSymbol('𝓸')">𝓸</button>
+                <button title="Script p" onclick="insertSymbol('𝓅')">𝓅</button>
+                <button title="Script q" onclick="insertSymbol('𝓆')">𝓆</button>
+                <button title="Script r" onclick="insertSymbol('𝓇')">𝓇</button>
+                <button title="Script s" onclick="insertSymbol('𝓈')">𝓈</button>
+                <button title="Script t" onclick="insertSymbol('𝓉')">𝓉</button>
+                <button title="Script u" onclick="insertSymbol('𝓊')">𝓊</button>
+                <button title="Script v" onclick="insertSymbol('𝓋')">𝓋</button>
+                <button title="Script w" onclick="insertSymbol('𝓌')">𝓌</button>
+                <button title="Script x" onclick="insertSymbol('𝓍')">𝓍</button>
+                <button title="Script y" onclick="insertSymbol('𝓎')">𝓎</button>
+                <button title="Script z" onclick="insertSymbol('𝓏')">𝓏</button>
+
+            </div>
+            <div>
+            <button title="Fraktur capital A" onclick="insertSymbol('𝔄')">𝔄</button>
+            <button title="Fraktur capital B" onclick="insertSymbol('𝔅')">𝔅</button>
+            <button title="Fraktur capital C" onclick="insertSymbol('ℭ')">ℭ</button>
+            <button title="Fraktur capital D" onclick="insertSymbol('𝔇')">𝔇</button>
+            <button title="Fraktur capital E" onclick="insertSymbol('𝔈')">𝔈</button>
+            <button title="Fraktur capital F" onclick="insertSymbol('𝔉')">𝔉</button>
+            <button title="Fraktur capital G" onclick="insertSymbol('𝔊')">𝔊</button>
+            <button title="Fraktur capital H" onclick="insertSymbol('ℌ')">ℌ</button>
+            <button title="Fraktur capital I" onclick="insertSymbol('ℑ')">ℑ</button>
+            <button title="Fraktur capital J" onclick="insertSymbol('𝔍')">𝔍</button>
+            <button title="Fraktur capital K" onclick="insertSymbol('𝔎')">𝔎</button>
+            <button title="Fraktur capital L" onclick="insertSymbol('𝔏')">𝔏</button>
+            <button title="Fraktur capital M" onclick="insertSymbol('𝔐')">𝔐</button>
+            <button title="Fraktur capital N" onclick="insertSymbol('𝔑')">𝔑</button>
+            <button title="Fraktur capital O" onclick="insertSymbol('𝔒')">𝔒</button>
+            <button title="Fraktur capital P" onclick="insertSymbol('𝔓')">𝔓</button>
+            <button title="Fraktur capital Q" onclick="insertSymbol('𝔔')">𝔔</button>
+            <button title="Fraktur capital R" onclick="insertSymbol('ℜ')">ℜ</button>
+            <button title="Fraktur capital S" onclick="insertSymbol('𝔖')">𝔖</button>
+            <button title="Fraktur capital T" onclick="insertSymbol('𝔗')">𝔗</button>
+            <button title="Fraktur capital U" onclick="insertSymbol('𝔘')">𝔘</button>
+            <button title="Fraktur capital V" onclick="insertSymbol('𝔙')">𝔙</button>
+            <button title="Fraktur capital W" onclick="insertSymbol('𝔚')">𝔚</button>
+            <button title="Fraktur capital X" onclick="insertSymbol('𝔛')">𝔛</button>
+            <button title="Fraktur capital Y" onclick="insertSymbol('𝔜')">𝔜</button>
+            <button title="Fraktur capital Z" onclick="insertSymbol('ℨ')">ℨ</button>
+        </div>
+
+        <div>
+            <button title="Fraktur a" onclick="insertSymbol('𝔞')">𝔞</button>
+            <button title="Fraktur b" onclick="insertSymbol('𝔟')">𝔟</button>
+            <button title="Fraktur c" onclick="insertSymbol('𝔠')">𝔠</button>
+            <button title="Fraktur d" onclick="insertSymbol('𝔡')">𝔡</button>
+            <button title="Fraktur e" onclick="insertSymbol('𝔢')">𝔢</button>
+            <button title="Fraktur f" onclick="insertSymbol('𝔣')">𝔣</button>
+            <button title="Fraktur g" onclick="insertSymbol('𝔤')">𝔤</button>
+            <button title="Fraktur h" onclick="insertSymbol('𝔥')">𝔥</button>
+            <button title="Fraktur i" onclick="insertSymbol('𝔦')">𝔦</button>
+            <button title="Fraktur j" onclick="insertSymbol('𝔧')">𝔧</button>
+            <button title="Fraktur k" onclick="insertSymbol('𝔨')">𝔨</button>
+            <button title="Fraktur l" onclick="insertSymbol('𝔩')">𝔩</button>
+            <button title="Fraktur m" onclick="insertSymbol('𝔪')">𝔪</button>
+            <button title="Fraktur n" onclick="insertSymbol('𝔫')">𝔫</button>
+            <button title="Fraktur o" onclick="insertSymbol('𝔬')">𝔬</button>
+            <button title="Fraktur p" onclick="insertSymbol('𝔭')">𝔭</button>
+            <button title="Fraktur q" onclick="insertSymbol('𝔮')">𝔮</button>
+            <button title="Fraktur r" onclick="insertSymbol('𝔯')">𝔯</button>
+            <button title="Fraktur s" onclick="insertSymbol('𝔰')">𝔰</button>
+            <button title="Fraktur t" onclick="insertSymbol('𝔱')">𝔱</button>
+            <button title="Fraktur u" onclick="insertSymbol('𝔲')">𝔲</button>
+            <button title="Fraktur v" onclick="insertSymbol('𝔳')">𝔳</button>
+            <button title="Fraktur w" onclick="insertSymbol('𝔴')">𝔴</button>
+            <button title="Fraktur x" onclick="insertSymbol('𝔵')">𝔵</button>
+            <button title="Fraktur y" onclick="insertSymbol('𝔶')">𝔶</button>
+            <button title="Fraktur z" onclick="insertSymbol('𝔷')">𝔷</button>
+        </div>
+    
+        </div>
+
+
+    <div class="math-editor">
+        <div id="mathArea" contenteditable="true" class="math-content" placeholder="Write your equation here..."></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

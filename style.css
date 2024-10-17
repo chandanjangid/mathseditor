@@ -1,0 +1,290 @@
+/* General styling for the entire page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.math-editor-container {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 50%; /* Set the width of the editor */
+    position: relative;
+    margin: 20px;
+}
+
+.math-toolbar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.math-toolbar button {
+    background-color: #c0c0c0;
+    color: #000000;
+    border: none;
+    padding: 3px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.math-toolbar button:hover {
+    background-color: #6d6f70;
+}
+
+/* Math editor styling */
+.math-editor {
+    width: 100%; /* Ensures the editor width is same as the container */
+    min-height: 100px;
+    cursor: text;
+}
+
+#mathArea {
+    width: 100%;
+    min-height: 150px;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+/* Matrix options container positioned below toolbar */
+#matrixOptions {
+    display: none; /* Initially hidden */
+    width: 100%; /* Full width matching the editor */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    flex-wrap: wrap; /* Items will wrap if they overflow */
+    gap: 10px;
+}
+
+#matrixOptions.active {
+    display: flex; /* Show matrix options when active */
+}
+
+
+
+
+
+/* Matrix buttons inside the options container */
+#matrixOptions button {
+    width: auto; /* Adjust the width as needed */
+    padding: 5px;
+    text-align: center;
+    background-color: #c0c0c0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-family: monospace;
+}
+
+#matrixOptions button:hover {
+    background-color: #6d6f70;
+}
+
+/* For matrix representation inside the button */
+.matrix-icon {
+    font-family: monospace;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    line-height: 1;
+    display: block;
+   
+}
+
+/* Fraction and other options container */
+.options-container {
+    display: none; /* Hidden by default */
+    position: absolute; /* Position absolutely for flexibility */
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.options-container.active {
+    display: block; /* Show when active */
+}
+
+/* Matrix table styling */
+.matrix {
+    border-collapse: collapse;
+    margin: 5px 0;
+}
+
+
+#mathArea.math-content {
+    padding:0px;
+    
+}
+
+.matrix td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    min-width: 30px;
+}
+
+/* Positioning the fraction options */
+#fractionOptions {
+    display: none;
+    
+}
+
+#fractionOptions.active {
+    display: block;
+}
+
+span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+#ellipsisContainer {
+    display: flex;
+    gap: 5px; /* Spacing between the ellipsis buttons */
+}
+
+.ellipsis-option {
+    font-size: 18px;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+button,
+.ellipsis-option {
+    padding: 8px 12px;
+    background-color: #c0c0c0;
+    color: #000000;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px; /* Increase font size for better visibility */
+}
+
+button:hover,
+.ellipsis-option:hover {
+    background-color: #6d6f70;
+}
+/* Basic Options Container Styling */
+
+
+
+#basicOptions.active {
+    display: block; /* Show when active */
+}
+
+button {
+    padding: 8px 12px;
+    background-color: #c0c0c0;
+    color: #000000;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.basicOptions button:hover {
+    background-color: #6d6f70;
+}
+
+button.highlighted {
+    background-color: #525252; /* You can change the color to any highlight color */
+}
+
+/* Hide options by default */
+.options {
+    display: none;
+}
+
+/* Show options when open */
+.options.open {
+    display: block;
+}
+
+
+.function-container {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.function-container button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.function-container button:hover {
+    background-color: #6d6f70;
+}
+
+#basicOptions {
+    display: none; /* Hidden by default */
+}
+
+#basicOptions.active {
+    display: block; /* Show when active class is present */
+}
+
+#relationOptions {
+    display: none;
+}
+#relationOptions.active {
+    display: block; /* Show when active class is present */
+}
+
+#sinOptions {
+    display: none;
+}
+#sinOptions.active {
+    display: block; /* Show when active class is present */
+}
+
+#sinhOptions {
+    display: none;
+}
+#sinhOptions.active {
+    display: block; /* Show when active class is present */
+}
+#greekOption {
+    display: none;
+}
+
+#greekOption.active {
+    display: block; /* Show when active class is present */
+}
+#arrowOption{
+    display:none;
+}
+
+#arrowOption.active {
+    display: block; /* Show when active class is present */
+}
+
